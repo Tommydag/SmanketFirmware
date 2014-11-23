@@ -213,7 +213,7 @@ void loop()
   setNetworkStateLED();
   for (int i = 0; i < 64; i++) {
     heater_update();
-    delay(1);
+    delay(10);
   }
 //  if (temp) {
 //    set_heater(4);
@@ -247,22 +247,23 @@ void messageCallout(String message)
   {
     off();
   }
-  else if (message.equals("heat_low"))
+  else if (message.equals("siren"))
   {
     on();
-    set_heater(0x01);
-    smartthing.send("low power"); 
+    set_heater(0x04);
+    smartthing.send("low"); 
+    Serial.println("LOWPOWER");
   }
-  else if (message.equals("heat_medium"))
+  else if (message.equals("strobe"))
   {
     on();
     set_heater(0x02);
     smartthing.send("medium power"); 
   }
-  else if (message.equals("heat_hight"))
+  else if (message.equals("both"))
   {
     on();
-    set_heater(0x04);
+    set_heater(0x01);
     smartthing.send("high power"); 
   }
  
